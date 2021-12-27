@@ -1,0 +1,31 @@
+'''イメージのビルド'''
+$ docker image build -t c4app3 ./
+[+] Building 29.2s (10/10) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                0.0s
+ => => transferring dockerfile: 280B                                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/golang:1.13.4-alpine3.10                                                                         3.8s
+ => [auth] library/golang:pull token for registry-1.docker.io                                                                                       0.0s
+ => [1/5] FROM docker.io/library/golang:1.13.4-alpine3.10@sha256:9d2a7c5b6447f525da0a4f18efd2cb05bf7d70228f75d713b7a67345f30157ac                  23.5s
+ => => resolve docker.io/library/golang:1.13.4-alpine3.10@sha256:9d2a7c5b6447f525da0a4f18efd2cb05bf7d70228f75d713b7a67345f30157ac                   0.0s
+ => => sha256:9d2a7c5b6447f525da0a4f18efd2cb05bf7d70228f75d713b7a67345f30157ac 1.65kB / 1.65kB                                                      0.0s
+ => => sha256:679fe3791d2710d53efe26b05ba1c7083178d6375318b0c669b6bcd98f25c448 1.36kB / 1.36kB                                                      0.0s
+ => => sha256:3024b4e742b095f3c81ed71f3ddc7bb6796664827845988333fac28564a96b85 3.80kB / 3.80kB                                                      0.0s
+ => => sha256:8ef94372a977c02d425f12c8cbda5416e372b7a869a6c2b20342c589dba3eae5 301.72kB / 301.72kB                                                  1.8s
+ => => sha256:1ec62c064901392a6722bb47a377c01a381f4482b1ce094b6d28682b6b6279fd 155B / 155B                                                          0.8s
+ => => sha256:a47b1e89d1946bbe1b6d1b7ade6d64a4411a782d115fd2d2f937de8095942190 126.86MB / 126.86MB                                                 13.0s
+ => => sha256:bf1a3d23480071c91034bf7684daaa10b200efe6f553d9b9f8e4004492769888 125B / 125B                                                          1.8s
+ => => extracting sha256:8ef94372a977c02d425f12c8cbda5416e372b7a869a6c2b20342c589dba3eae5                                                           0.5s
+ => => extracting sha256:1ec62c064901392a6722bb47a377c01a381f4482b1ce094b6d28682b6b6279fd                                                           0.0s
+ => => extracting sha256:a47b1e89d1946bbe1b6d1b7ade6d64a4411a782d115fd2d2f937de8095942190                                                           9.6s
+ => => extracting sha256:bf1a3d23480071c91034bf7684daaa10b200efe6f553d9b9f8e4004492769888                                                           0.0s
+ => [internal] load build context                                                                                                                   0.0s
+ => => transferring context: 329B                                                                                                                   0.0s
+ => [2/5] WORKDIR /src                                                                                                                              0.3s
+ => [3/5] COPY ./main.go /src                                                                                                                       0.0s
+ => [4/5] RUN go build -o /usr/local/bin/startapp main.go                                                                                           1.3s
+ => exporting to image                                                                                                                              0.1s
+ => => exporting layers                                                                                                                             0.1s
+ => => writing image sha256:98a45f566bf1e889772617ea5fd77ac41154121d100f82f3b305915f1548a418                                                        0.0s
+ => => naming to docker.io/library/c4app3                                                                                                           0.0s

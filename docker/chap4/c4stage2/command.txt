@@ -1,0 +1,37 @@
+'''イメージのビルド'''
+$ docker image build -t c4app4 ./
+[+] Building 1.0s (12/12) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                0.0s
+ => => transferring dockerfile: 352B                                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.10.3                                                                                    0.0s
+ => [internal] load metadata for docker.io/library/golang:1.13.4-alpine3.10                                                                         0.8s
+ => [builder 1/4] FROM docker.io/library/golang:1.13.4-alpine3.10@sha256:9d2a7c5b6447f525da0a4f18efd2cb05bf7d70228f75d713b7a67345f30157ac           0.0s
+ => [stage-1 1/2] FROM docker.io/library/alpine:3.10.3                                                                                              0.0s
+ => [internal] load build context                                                                                                                   0.0s
+ => => transferring context: 112B                                                                                                                   0.0s
+ => CACHED [builder 2/4] WORKDIR /src                                                                                                               0.0s
+ => CACHED [builder 3/4] COPY ./main.go /src                                                                                                        0.0s
+ => CACHED [builder 4/4] RUN go build -o start_appserver main.go                                                                                    0.0s
+ => CACHED [stage-1 2/2] COPY --from=builder /src/start_appserver /bin/start_appserver                                                              0.0s
+ => exporting to image                                                                                                                              0.0s
+ => => exporting layers                                                                                                                             0.0s
+ => => writing image sha256:8d87fbc2718a0ad573cec4c8f119cfc0d9ec5a5aeee17f07d5442d3ed0de52ef                                                        0.0s
+ => => naming to docker.io/library/c4app4                                                                                                           0.0s
+
+
+
+"""コンテナの作成と実行"""
+$ docker container run --rm -d -p 8080:80 --name myapp c4app4
+3d79d052cfedc37fb91a54be811f32a850dde6970e863d3f315eaad072edfb4b
+
+
+
+'''イメージが作成されたことの確認'''
+$ docker image ls
+REPOSITORY   TAG             IMAGE ID       CREATED             SIZE
+c4app4       latest          8d87fbc2718a   10 minutes ago      13MB
+
+
+

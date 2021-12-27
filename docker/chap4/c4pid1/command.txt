@@ -1,0 +1,41 @@
+'''イメージのビルド'''
+$ docker image build -t c4pid1 ./
+[+] Building 7.2s (9/9) FINISHED
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 289B                                       0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.17.5-alpine     2.7s
+ => [auth] library/nginx:pull token for registry-1.docker.io               0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 170B                                          0.0s
+ => [1/3] FROM docker.io/library/nginx:1.17.5-alpine@sha256:559cde0e812db  3.3s
+ => => resolve docker.io/library/nginx:1.17.5-alpine@sha256:559cde0e812db  0.0s
+ => => sha256:b4c0378c841cd76f0b75bc63454bfc6fe194a5220d4eab0 739B / 739B  0.0s
+ => => sha256:b6753551581f2d2fb976dd502f15764526d423b23cb 7.21kB / 7.21kB  0.0s
+ => => sha256:110ad692b78259800e64add1954eb12023af0ad002a 5.95MB / 5.95MB  0.9s
+ => => sha256:559cde0e812dba817c131173217712bf34c2c80a0b6 1.41kB / 1.41kB  0.0s
+ => => extracting sha256:110ad692b78259800e64add1954eb12023af0ad002ae3c69  2.0s
+ => [2/3] COPY ./start.sh /usr/local/bin/start.sh                          0.2s
+ => [3/3] RUN chmod +x /usr/local/bin/start.sh                             0.6s
+ => exporting to image                                                     0.1s
+ => => exporting layers                                                    0.1s
+ => => writing image sha256:e1ee7ecaee0e8d4c27976d70a1ee5155c33d6b44cf31c  0.0s
+ => => naming to docker.io/library/c4pid1                                  0.0s
+
+
+
+'''コンテナの実行'''
+$ docker container run --rm -d c4pid1
+9eca918395cdf9b4b87024bed882032f20b93ebd73a713890bee9a05601c90c2
+
+
+
+'''コンテナのPIDの確認'''
+$ docker container exec 9eca918395 ps
+PID   USER     TIME  COMMAND
+    1 root      0:00 {start.sh} /bin/sh /usr/local/bin/start.sh
+    8 root      0:00 nginx: master process nginx -g daemon off;
+    9 nginx     0:00 nginx: worker process
+   10 nginx     0:00 nginx: worker process
+   11 root      0:00 ps

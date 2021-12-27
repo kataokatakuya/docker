@@ -1,0 +1,16 @@
+$ docker image build -f Dockerfile.local.yml -t mynginx ./
+[+] Building 21.5s (9/9) FINISHED
+ => [internal] load build definition from Dockerfile.local.yml             0.0s
+ => => transferring dockerfile: 130B                                       0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 117B                                          0.0s
+ => [internal] load metadata for docker.io/library/centos:7.7.1908         0.0s
+ => [internal] load build context                                          0.1s
+ => => transferring context: 796B                                          0.0s
+ => [1/4] FROM docker.io/library/centos:7.7.1908                           0.0s
+ => [2/4] RUN rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm                               1.7s
+ => [3/4] RUN yum -y install nginx                                        18.4s
+ => [4/4] COPY ./html/ /usr/share/nginx/html/                              0.1s
+ => exporting to image                                                     1.1s
+ => => exporting layers                                                    1.1s
+ => => writing image sha256:ffdc3a6a64f05dbe960061989849cc1af0c5cb74a9628a95c2fc6f386d54495d

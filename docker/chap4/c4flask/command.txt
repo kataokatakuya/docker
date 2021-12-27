@@ -1,0 +1,39 @@
+'''イメージのビルド'''
+$ docker image build -t c4app1 ./
+[+] Building 6.4s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                       0.1s
+ => => transferring dockerfile: 289B                                       0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load metadata for docker.io/library/python:3.7.5-slim       0.0s
+ => [internal] load build context                                          0.1s
+ => => transferring context: 307B                                          0.0s
+ => [1/3] FROM docker.io/library/python:3.7.5-slim                         0.1s
+ => [2/3] RUN pip install flask==1.1.1                                     5.7s
+ => [3/3] COPY ./server.py /server.py                                      0.1s
+ => exporting to image                                                     0.3s
+ => => exporting layers                                                    0.3s
+ => => writing image sha256:3a116ab8ad621a8b40a6a6c96869ac26067831db0d7c1  0.0s
+ => => naming to docker.io/library/c4app1                                  0.0s
+
+
+
+'''イメージが作成されたことの確認'''
+$ docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+c4app1       latest    3a116ab8ad62   22 seconds ago   189MB
+
+
+
+'''dockerの作成'''
+$ docker container run --rm -d -p 8080:80 --name myapp c4app1
+8ec2075d57c734df0510fbdcb4dfa6122099670e7138c22b00a0a9df16809824
+
+
+
+'''dockerの停止
+$ docker container stop myapp
+myapp
+
+
+

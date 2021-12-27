@@ -1,0 +1,25 @@
+'''イメージのビルド'''
+$ docker image build -t c4app5 ./
+[+] Building 17.9s (10/10) FINISHED
+ => [internal] load build definition from Dockerfile                                0.0s
+ => => transferring dockerfile: 120B                                                0.0s
+ => [internal] load .dockerignore                                                   0.0s
+ => => transferring context: 2B                                                     0.0s
+ => [internal] load metadata for docker.io/library/golang:1.13.4-alpine3.10         0.8s
+ => [builder 1/4] FROM docker.io/library/golang:1.13.4-alpine3.10@sha256:9d2a7c5b6  0.0s
+ => [internal] load build context                                                   0.0s
+ => => transferring context: 329B                                                   0.0s
+ => CACHED [builder 2/4] WORKDIR /src                                               0.0s
+ => CACHED [builder 3/4] COPY ./main.go /src                                        0.0s
+ => [builder 4/4] RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installs  16.6s
+ => [stage-1 1/1] COPY --from=builder ./src/startapp /startapp                      0.1s
+ => exporting to image                                                              0.1s
+ => => exporting layers                                                             0.1s
+ => => writing image sha256:701b9ca72fde5866423466c78ebf1a82121dd55d45767c4f750360  0.0s
+ => => naming to docker.io/library/c4app5                                           0.0s
+
+
+'''イメージが作成されたことの確認'''
+$ docker image ls
+REPOSITORY   TAG             IMAGE ID       CREATED              SIZE
+c4app5       latest          701b9ca72fde   About a minute ago   7.4MB
