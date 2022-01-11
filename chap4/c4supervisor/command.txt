@@ -1,0 +1,79 @@
+# イメージのビルド
+$ docker image build -t c4supervisor ./
+[+] Building 34.9s (9/9) FINISHED
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 536B                                       0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load metadata for docker.io/library/centos:7.7.1908         0.0s
+ => CACHED [1/4] FROM docker.io/library/centos:7.7.1908                    0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 360B                                          0.0s
+ => [2/4] RUN yum install -y epel-release     && yum install -y http://n  33.6s
+ => [3/4] RUN ssh-keygen -A                                                0.6s
+ => [4/4] COPY supervisord.conf /etc/supervisord.conf                      0.1s
+ => exporting to image                                                     0.5s
+ => => exporting layers                                                    0.4s
+ => => writing image sha256:cd994cf198df15cf727503dd6c3b168c0dac9610c5eae  0.0s
+ => => naming to docker.io/library/c4supervisor                            0.0s
+
+
+
+# コンテナの実行
+$ docker container run -d -p 10022:22 -p 8080:80 --name c4supervisor c4supervisor
+6b73c88181caf2840db5b8817c416033ba0b2dd188a29045a736b3d00a6f91f7
+
+
+
+# 実行中のプロセスの一覧表示
+$ docker container exec c4supervisor ps
+  PID TTY          TIME CMD
+    1 ?        00:00:00 supervisord
+   10 ?        00:00:00 nginx
+   11 ?        00:00:00 sshd
+   14 ?        00:00:00 ps
+
+
+
+# プロセスの停止
+$ docker container exec c4supervisor kill 10
+$ docker container exec c4supervisor kill 11
+
+
+
+# 実行中のプロセスの一覧表示
+$ docker container exec c4supervisor ps
+  PID TTY          TIME CMD
+    1 ?        00:00:00 supervisord
+   37 ?        00:00:00 nginx
+   48 ?        00:00:00 sshd
+   49 ?        00:00:00 ps
+
+
+
+# コンテナの停止
+$ docker container stop c4supervisor
+
+
+
+# ログの確認
+$ docker container logs c4supervisor
+2022-01-11 16:13:02,396 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2022-01-11 16:13:02,398 INFO supervisord started with pid 1
+2022-01-11 16:13:03,403 INFO spawned: 'nginx' with pid 10
+2022-01-11 16:13:03,408 INFO spawned: 'sshd' with pid 11
+2022-01-11 16:13:04,425 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-01-11 16:13:04,425 INFO success: sshd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-01-11 16:16:30,387 INFO exited: nginx (exit status 0; expected)
+2022-01-11 16:16:31,393 INFO spawned: 'nginx' with pid 37
+2022-01-11 16:16:32,414 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-01-11 16:17:26,685 INFO exited: sshd (exit status 0; expected)
+2022-01-11 16:17:27,688 INFO spawned: 'sshd' with pid 48
+2022-01-11 16:17:28,690 INFO success: sshd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-01-11 16:18:38,641 WARN received SIGTERM indicating exit request
+2022-01-11 16:18:38,642 INFO waiting for nginx, sshd to die
+2022-01-11 16:18:38,644 INFO stopped: sshd (exit status 0)
+2022-01-11 16:18:38,654 INFO stopped: nginx (exit status 0)
+c4supervisor
+
+
