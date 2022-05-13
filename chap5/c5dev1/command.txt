@@ -1,0 +1,48 @@
+# イメージのビルド
+$ docker-compose build
+Building app
+[+] Building 1.1s (9/9) FINISHED                                                                                                         
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 37B                                                                                                 0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/python:3.7.5-slim                                                                0.8s
+ => [1/4] FROM docker.io/library/python:3.7.5-slim@sha256:59af1bb7fb92ff97c9a23abae23f6beda13a95dbfd8100c7a2f71d150c0dc6e5          0.0s
+ => => resolve docker.io/library/python:3.7.5-slim@sha256:59af1bb7fb92ff97c9a23abae23f6beda13a95dbfd8100c7a2f71d150c0dc6e5          0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 58B                                                                                                    0.0s
+ => CACHED [2/4] RUN pip install flask==1.1.1                                                                                       0.0s
+ => CACHED [3/4] WORKDIR /src                                                                                                       0.0s
+ => CACHED [4/4] COPY ./src/server.py /src/                                                                                         0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:ac162d40603b9a686bb48f2773a49fa43bcc4dc6532d5d0d34025d446f356925                                        0.0s
+ => => naming to docker.io/library/c5dev1_app                                                                                       0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+Building web
+[+] Building 1.1s (7/7) FINISHED                                                                                                         
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 36B                                                                                                 0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.17.5-alpine                                                              0.8s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 60B                                                                                                    0.0s
+ => [1/2] FROM docker.io/library/nginx:1.17.5-alpine@sha256:559cde0e812dba817c131173217712bf34c2c80a0b6892409cbcf7d760fca8be        0.0s
+ => CACHED [2/2] COPY ./html/ /usr/share/nginx/html/                                                                                0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:9276cf2d6d19efa08cd00a4219596312c93cc0436e3efe7a7e7b1b2659f617ab                                        0.0s
+ => => naming to docker.io/library/c5dev1_nginx                                                                                     0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+
+
+# コンテナの展開
+$ docker compose up -d
+[+] Running 3/3
+ ⠿ Network c5dev1_default  Created                                                                                                  0.1s
+ ⠿ Container c5dev1_nginx  Started                                                                                                  1.5s
+ ⠿ Container c5dev1-app-1  Started 
