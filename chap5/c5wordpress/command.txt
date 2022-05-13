@@ -1,0 +1,46 @@
+# コンテナの展開
+$ docker-compose up -d
+Creating network "c5wordpress_wp_net" with driver "bridge"
+Creating volume "c5wordpress_mysql_volume" with local driver
+Pulling mysql (mysql:5.7.28)...
+5.7.28: Pulling from library/mysql
+804555ee0376: Pull complete
+c53bab458734: Pull complete
+ca9d72777f90: Pull complete
+2d7aad6cb96e: Pull complete
+8d6ca35c7908: Pull complete
+6ddae009e760: Pull complete
+327ae67bbe7b: Pull complete
+31f1f8385b27: Pull complete
+a5a3ad97e819: Pull complete
+48bede7828ac: Pull complete
+380afa2e6973: Pull complete
+Digest: sha256:b38555e593300df225daea22aeb104eed79fc80d2f064fde1e16e1804d00d0fc
+Status: Downloaded newer image for mysql:5.7.28
+Pulling wordpress (wordpress:5.2.3-php7.3-apache)...
+5.2.3-php7.3-apache: Pulling from library/wordpress
+b8f262c62ec6: Pulling fs layer
+a98660e7def6: Pulling fs layer
+4d75689ceb37: Pulling fs layer
+639eb0368afa: Pulling fs layer
+99e337926e9c: Pulling fs layer
+431d44b3ce98: Pulling fs layer
+beb665ea0e0e: Pulling fs layer
+1914f5ed0362: Pull complete
+3bb658c14677: Pull complete
+6a4699b1063e: Pull complete
+d23f6accef3d: Pull complete
+3814846efc9c: Pull complete
+e14c865e4394: Pull complete
+2133ee9f21fd: Pull complete
+c54f25ec0676: Pull complete
+b2f1c6cffd7b: Pull complete
+c26c7edcc26f: Pull complete
+119b6e1da171: Pull complete
+555b521641eb: Pull complete
+e2864c97d80f: Pull complete
+dfb00b06eb36: Pull complete
+Digest: sha256:661e9b06de5e9a2b9b44461206fe05362afbc66d4cc9e4f2135da083a709de9e
+Status: Downloaded newer image for wordpress:5.2.3-php7.3-apache
+Creating c5wordpress_mysql_1 ... done
+Creating c5wordpress_wordpress_1 ... done

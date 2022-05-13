@@ -1,0 +1,23 @@
+# コンテナの展開
+$ docker-compose up -d
+Creating network "c5nginx_default" with the default driver
+Pulling nginx (nginx:1.17.6-alpine)...
+1.17.6-alpine: Pulling from library/nginx
+89d9c30c1d48: Already exists
+24f1c4f0b2f4: Already exists
+Digest: sha256:0e61b143db3110f3b8ae29a67f107d5536b71a7c1f10afb14d4228711fc65a13
+Status: Downloaded newer image for nginx:1.17.6-alpine
+Creating c5nginx_nginx_1 ... done
+
+
+
+# 実行状況を確認
+$ docker-compose ps
+     Name               Command          State          Ports        
+---------------------------------------------------------------------
+c5nginx_nginx_1   nginx -g daemon off;   Up      0.0.0.0:8080->80/tcp
+
+
+$ docker container ls
+CONTAINER ID   IMAGE                 COMMAND                  CREATED         STATUS         PORTS                  NAMES
+7437fee4e3ef   nginx:1.17.6-alpine   "nginx -g 'daemon of…"   3 minutes ago   Up 3 minutes   0.0.0.0:8080->80/tcp   c5nginx_nginx_1
